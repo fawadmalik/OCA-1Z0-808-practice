@@ -24,7 +24,7 @@ public class LambdaExpressions {
 	private static void print(List<Animal> animals, CheckAnimal filter) {
 		for (Animal animal : animals) {
 			if (filter.check(animal)) {
-				System.out.println(animal.getType());
+				System.out.println(animal.getType()+ " can jump");
 			}
 		}
 
