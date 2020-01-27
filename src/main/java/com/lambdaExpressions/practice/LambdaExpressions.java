@@ -10,10 +10,16 @@ public class LambdaExpressions {
 		animals.add(new Animal("rabbit", true, false));
 		animals.add(new Animal("dog", true, true));
 
+		/*
 		print(animals, new CheckCanJump());
 
 		print(animals, animal -> animal.canSwim());
 		print(animals, animal -> !animal.canSwim());
+		*/
+		Animal fish = animals.get(0);
+		Animal rabbit = animals.get(1);
+		
+		print(fish, rabbit, ((an1, an2) -> an1.canSwim() && an2.canSwim()));
 
 	}
 
