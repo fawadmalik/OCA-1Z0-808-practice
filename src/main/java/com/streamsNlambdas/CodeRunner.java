@@ -13,7 +13,9 @@ public class CodeRunner {
 		List<JiraIssue> openJiras = jiras.stream().filter(jira -> jira.getStatus().equals(Status.OPEN))
 				.collect(Collectors.toList());
 
-		openJiras.forEach(System.out::println);
+		openJiras.forEach(jira -> {
+			jira.advancePriority();
+		});
 
 		boolean seriousJiras = jiras.stream().allMatch(jira -> jira.getPriority().compareTo(Priority.LOW) > 0);
 		System.out.println(seriousJiras);
@@ -39,34 +41,5 @@ public class CodeRunner {
 		issues.add(new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-700"));
 
 		return issues;
-	}
-}
-
-class JiraIssue {
-	private final Status status;
-	private final Priority priority;
-	private final String ID;
-
-	public JiraIssue(Status status, Priority priority, String ID) {
-		this.status = status;
-		this.priority = priority;
-		this.ID = ID;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public Priority getPriority() {
-		return priority;
-	}
-
-	public String getID() {
-		return ID;
-	}
-
-	@Override
-	public String toString() {
-		return "Jira{" + "ID='" + ID + "\'" + ", status=" + status + ", priority=" + priority + "}";
 	}
 }
