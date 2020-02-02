@@ -28,6 +28,22 @@ public class CodeRunner {
 			allJiras.forEach(System.out::println);
 			System.out.println();
 		});
+		
+		List<JiraIssue> jirasSortedByPriority =
+		        jiras.stream()
+		                .filter(jira -> jira.getPriority().compareTo(Priority.LOW) > 0)
+		                //.sorted(comparing(JiraIssue::getPriority).reversed())
+		                .map(jira -> jira) // equivalent to not including this line
+		                .collect(Collectors.toList());
+		System.out.println(jirasSortedByPriority);
+		List<JiraIssue> jirasSortedByPriorityWithoutMapFunction =
+				jiras.stream()
+		                .filter(jira -> jira.getPriority().compareTo(Priority.LOW) > 0)
+		                //.sorted(JiraIssue::getPriority).reversed()
+		                //.sorted(comparing(JiraIssue::getPriority).reversed())
+		                //.collect(toList());
+		                .collect(Collectors.toList());
+		System.out.println(jirasSortedByPriorityWithoutMapFunction);
 	}
 
 	private static ArrayList<JiraIssue> getAllJiraIssues() {
