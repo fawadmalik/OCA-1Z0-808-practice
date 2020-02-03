@@ -1,6 +1,7 @@
 package com.streamsNlambdas;
 
 public class JiraIssue {
+	private int batch;
 	private Status status;
 	private Priority priority;
 	private final String ID;
@@ -9,6 +10,7 @@ public class JiraIssue {
 		this.status = status;
 		this.priority = priority;
 		this.ID = ID;
+		batch=1;
 	}
 
 	public Status getStatus() {
@@ -21,6 +23,10 @@ public class JiraIssue {
 
 	public String getID() {
 		return ID;
+	}
+	
+	public int getBatch() {
+		return batch;
 	}
 
 	
