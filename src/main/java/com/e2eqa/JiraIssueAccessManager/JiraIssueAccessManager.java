@@ -13,4 +13,12 @@ public class JiraIssueAccessManager {
 		
 		return jirasSortedByPriority;
 	}
+
+	public List<JiraIssue> getJirasWithClosedStatus(List<JiraIssue> jiras) {
+		List<JiraIssue> jirasWithClosedStatus = jiras.stream()
+				.filter(jira -> jira.getStatus().ordinal() == Status.CLOSED.ordinal())
+				.collect(Collectors.toList());
+		
+		return jirasWithClosedStatus;
+	}
 }

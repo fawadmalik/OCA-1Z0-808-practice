@@ -17,6 +17,8 @@ public class JiraIssueAccessManagerApp {
 		
 		getJirasSortedByPriority(jiras);
 		
+		getCostOfBugsFixed(jiras);
+		
 	}
 	
 	private void getJirasSortedByPriority(List<JiraIssue> jiras) {
@@ -25,6 +27,16 @@ public class JiraIssueAccessManagerApp {
 		// get a list of jira issues sorted by priority
 		List<JiraIssue> jirasSortedByPriority = jiraIssueAccessManager.getJirasSortedByPriority(jiras);
 		System.out.println("stream : " + jirasSortedByPriority);
+	}
+
+	private void getCostOfBugsFixed(List<JiraIssue> jiras) {
+		JiraIssueAccessManager jiraIssueAccessManager = new JiraIssueAccessManager();
+		
+		// get a list of jira issues sorted by priority
+		List<JiraIssue> jirasWithClosedStatus = jiraIssueAccessManager.getJirasSortedByPriority(jiras);
+		int totalCostOfBugFixing = jirasWithClosedStatus.parallelStream()
+				.mapToInt(JiraIssue::getCostOfix).sum();
+		System.out.println("Total Cost of bug fixing = $" + totalCostOfBugFixing);
 	}
 	
 	private void stash(List<JiraIssue>jiras) {
@@ -65,12 +77,12 @@ public class JiraIssueAccessManagerApp {
 	private List<JiraIssue> getAllJiraIssues() {
 		JiraIssue[] jiraArray = new JiraIssue[] {
 				new JiraIssue(Status.OPEN, Priority.LOW, "TA-100"),
-				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-200"),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-200", 100),
 				new JiraIssue(Status.OPEN, Priority.LOW, "TA-300"),
 				new JiraIssue(Status.OPEN, Priority.HIGH, "TA-400"),
-				new JiraIssue(Status.CLOSED, Priority.MEDIUM, "TA-500"),
-				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-600"),
-				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-700")
+				new JiraIssue(Status.CLOSED, Priority.MEDIUM, "TA-500", 1000),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-600", 400),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-700", 650)
 		};
 		return Arrays.asList(jiraArray);
 	}
