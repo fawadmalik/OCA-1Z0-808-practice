@@ -1,16 +1,16 @@
-package com.streamsNlambdas;
+package com.e2eqa.JiraIssueAccessManager;
 
 public class JiraIssue {
-	private int batch;
 	private Status status;
 	private Priority priority;
 	private final String ID;
+	private int priorityOrdinal;
 
 	public JiraIssue(Status status, Priority priority, String ID) {
 		this.status = status;
 		this.priority = priority;
 		this.ID = ID;
-		batch=1;
+		priorityOrdinal=priority.ordinal();
 	}
 
 	public Status getStatus() {
@@ -25,8 +25,8 @@ public class JiraIssue {
 		return ID;
 	}
 	
-	public int getBatch() {
-		return batch;
+	public int getPriorityOrdinal() {
+		return priorityOrdinal;
 	}
 
 	
@@ -35,6 +35,7 @@ public class JiraIssue {
 		
 		if(currentPriorityOrdinal < (Priority.values().length)) {
 			priority = Priority.values()[++currentPriorityOrdinal];
+			priorityOrdinal = priority.ordinal();
 		}
 	}
 	

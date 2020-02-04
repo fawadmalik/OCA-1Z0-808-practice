@@ -3,6 +3,11 @@ package com.streamsNlambdas;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
+
+import com.e2eqa.JiraIssueAccessManager.JiraIssue;
+import com.e2eqa.JiraIssueAccessManager.Priority;
+import com.e2eqa.JiraIssueAccessManager.Status;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 

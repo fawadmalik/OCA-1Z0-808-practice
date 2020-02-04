@@ -1,15 +1,33 @@
-package com.streamsNlambdas;
+package com.e2eqa.JiraIssueAccessManager;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CodeRunner {
+public class JiraIssueAccessManagerApp {
 
 	public static void main(String[] args) {
-		ArrayList<JiraIssue> jiras = getAllJiraIssues();
+		JiraIssueAccessManagerApp app = new JiraIssueAccessManagerApp();
+		app.invokeAllMethods();		
+	}
+
+	private void invokeAllMethods() {
+		List<JiraIssue> jiras = getAllJiraIssues();
 		
+		getJirasSortedByPriority(jiras);
+		
+	}
+	
+	private void getJirasSortedByPriority(List<JiraIssue> jiras) {
+		JiraIssueAccessManager jiraIssueAccessManager = new JiraIssueAccessManager();
+		
+		// get a list of jira issues sorted by priority
+		List<JiraIssue> jirasSortedByPriority = jiraIssueAccessManager.getJirasSortedByPriority(jiras);
+		System.out.println("stream : " + jirasSortedByPriority);
+	}
+	
+	private void stash(List<JiraIssue>jiras) {
 		List<JiraIssue> openJiras = jiras.stream().filter(jira -> jira.getStatus().equals(Status.OPEN))
 				.collect(Collectors.toList());
 
@@ -43,17 +61,17 @@ public class CodeRunner {
 				.collect(Collectors.toList());
 		System.out.println(jirasSortedByPriorityWithoutMapFunction);
 	}
-
-	private static ArrayList<JiraIssue> getAllJiraIssues() {
-		ArrayList<JiraIssue> issues = new ArrayList<>();
-		issues.add(new JiraIssue(Status.OPEN, Priority.LOW, "TA-100"));
-		issues.add(new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-200"));
-		issues.add(new JiraIssue(Status.OPEN, Priority.LOW, "TA-300"));
-		issues.add(new JiraIssue(Status.OPEN, Priority.HIGH, "TA-400"));
-		issues.add(new JiraIssue(Status.CLOSED, Priority.MEDIUM, "TA-500"));
-		issues.add(new JiraIssue(Status.CLOSED, Priority.BLOCKER, "TA-600"));
-		issues.add(new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-700"));
-
-		return issues;
+	
+	private List<JiraIssue> getAllJiraIssues() {
+		JiraIssue[] jiraArray = new JiraIssue[] {
+				new JiraIssue(Status.OPEN, Priority.LOW, "TA-100"),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-200"),
+				new JiraIssue(Status.OPEN, Priority.LOW, "TA-300"),
+				new JiraIssue(Status.OPEN, Priority.HIGH, "TA-400"),
+				new JiraIssue(Status.CLOSED, Priority.MEDIUM, "TA-500"),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-600"),
+				new JiraIssue(Status.CLOSED, Priority.HIGH, "TA-700")
+		};
+		return Arrays.asList(jiraArray);
 	}
 }
