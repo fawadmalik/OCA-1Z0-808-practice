@@ -1,4 +1,5 @@
 # OCA-1Z0-808-practice
+![Java CI](https://github.com/fawadmalik/OCA-1Z0-808-practice/workflows/Java%20CI/badge.svg)
 ### Practice code mainly for newer java constructs like streams and lambdas.
 
 #### I am using Jira Issue lists to process with streams and lambdas.
