@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestJiraIssueAccessManager {
@@ -31,6 +32,7 @@ public class TestJiraIssueAccessManager {
 		assertTrue(highestPriorityOrdinal.get().intValue() == SortedIssuesByPriorityDesc.get(0).getPriority().ordinal());		
 	}
 	
+	@Ignore("WIP. work in progress.")
 	@Test
 	public void testGetJirasWithClosedStatus() {
 		assertTrue(false);		
