@@ -31,6 +31,10 @@ public class TestJiraIssueAccessManager {
 		assertTrue(highestPriorityOrdinal.get().intValue() == SortedIssuesByPriorityDesc.get(0).getPriority().ordinal());		
 	}
 	
+	@Test
+	public void testGetJirasWithClosedStatus() {
+		assertTrue(false);		
+	}
 	
 	private static List<JiraIssue> getAllJiraIssues() {
 		JiraIssue[] jiraArray = new JiraIssue[] {
