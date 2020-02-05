@@ -1,31 +1,36 @@
 package com.e2eqa.JiraIssueAccessManager;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.everyItem;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestJiraIssueAccessManager {
 
+	private static JiraIssueAccessManager jiraIssueAccessManager;
+	private static List<JiraIssue> allIssues;
+	
+	@BeforeClass
+	public static void setUp() {
+		jiraIssueAccessManager = new JiraIssueAccessManager();
+		allIssues = getAllJiraIssues();
+	}
+	
 	@Test
 	public void testGetJirasSortedByPriority() {
-		List<JiraIssue> mixedIssues = getAllJiraIssues();
-		Optional<Integer> highestPriorityOrdinal = mixedIssues.stream()
+		Optional<Integer> highestPriorityOrdinal = allIssues.stream()
 				.map(JiraIssue::getPriorityOrdinal).reduce(Integer::max);
-		assertTrue(highestPriorityOrdinal.get().intValue() != mixedIssues.get(0).getPriority().ordinal());
+		assertTrue(highestPriorityOrdinal.get().intValue() != allIssues.get(0).getPriority().ordinal());
 
 		List<JiraIssue> SortedIssuesByPriorityDesc = 
-				(new JiraIssueAccessManager()).getJirasSortedByPriority(mixedIssues);
+				jiraIssueAccessManager.getJirasSortedByPriority(allIssues);
 		assertTrue(highestPriorityOrdinal.get().intValue() == SortedIssuesByPriorityDesc.get(0).getPriority().ordinal());		
 	}
+	
 	
 	private static List<JiraIssue> getAllJiraIssues() {
 		JiraIssue[] jiraArray = new JiraIssue[] {
